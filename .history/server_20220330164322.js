@@ -1,9 +1,9 @@
 const express = require('express');
-const path = require('path');
+
 const app = express();
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/html/testpage.html'));
+  res.send('Sccessful response.');
 });
 
 const port = 3000; //define port via which the application will be accessable

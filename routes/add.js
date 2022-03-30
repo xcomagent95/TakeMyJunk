@@ -19,17 +19,22 @@ const client = new MongoClient(url) // mongodb client
 //Post Location - this post operation can be used to store new locations in the locations collection
 router.post('/newBox', function (req, res, next) {
 
+  console.log("Submitted a Box!")
 
+  var name = req.body.name
+  var commentary = req.body.commentary
+  var date = req.body.date
+  var street = req.body.street
+  var house_number = req.body.house_number
+  var items = []
 
-  var test = req.body.name
-  console.log(test)
   client.connect(function(err) 
   {
     const db = client.db(dbName) //database
     const collection = db.collection(boxesCollection) //locations collection
-    collection.insertOne({test}, function(err, result) //insert new location into collection
+    collection.insertOne({name, commentary, date, street, house_number, items}, function(err, result) //insert new location into collection
           {
-            //res.sendFile(__dirname + "../html/testpage.html"); //send positive response -> the post operation war successful
+            res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
             return;
            })
   }) 

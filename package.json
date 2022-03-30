@@ -1,0 +1,23 @@
+{
+  "name": "hackathon",
+  "version": "1.0.0",
+  "description": "A repositoty for the IfGi hack 2022",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xcomagent95/hackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xcomagent95/hackathon/issues"
+  },
+  "homepage": "https://github.com/xcomagent95/hackathon#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}

@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/xcomagent95/hackathon#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "leaflet": "^1.7.1",
+    "leaflet-draw": "^1.0.4",
+    "mongo": "^0.1.0"
   }
 }

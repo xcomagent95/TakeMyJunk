@@ -17,7 +17,7 @@ const { stringify } = require('querystring');
 const client = new MongoClient(url) // mongodb client
 
 //Post Location - this post operation can be used to store new locations in the locations collection
-router.post('/newBox', function (req, res, next) {
+router.post('/addBox', function (req, res, next) {
 
   console.log("Submitted a Box!")
 
@@ -28,6 +28,7 @@ router.post('/newBox', function (req, res, next) {
   var house_number = req.body.house_number
   var items = []
 
+  //Check if Name exists
   client.connect(function(err) 
   {
     const db = client.db(dbName) //database

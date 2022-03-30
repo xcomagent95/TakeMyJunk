@@ -24,5 +24,10 @@ var addBoxRouter = require(__dirname + '/routes/add.js'); //require search route
 app.use('/add', addBoxRouter); //instruct the server to use the router
 
 
+var removeBoxRouter = require(__dirname + '/routes/delete.js'); //require search router
+app.use('/delete', removeBoxRouter); //instruct the server to use the router
+
+
+
 //Gets for webpages to be hosted
 app.get("/test", (req, res) => { res.sendFile(__dirname + "/html/testpage.html"); });

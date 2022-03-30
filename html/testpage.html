@@ -9,7 +9,7 @@
         </div>
 
         <div>
-            <form id="addBoxForm" action="/add/newBox" method="post">
+            <form id="addBoxForm" action="/add/addBox" method="post">
               <label for="fname">Name</label><br>
               <input id="Name" name="name"><br>
               <label for="fname">Kommentar</label><br>
@@ -20,6 +20,14 @@
               <input id="Strasse" name="street"><br>
               <label for="fname">Hausnummer</label><br>
               <input id="Hausnummer" name="house_number"><br>
+              <input type="submit" value="Submit">
+            </form> 
+          </div>
+
+          <div>
+            <form id="removeBoxForm" action="/delete/removeBox" method="post">
+              <label for="fname">Name</label><br>
+              <input id="Name" name="name"><br>
               <input type="submit" value="Submit">
             </form> 
           </div>

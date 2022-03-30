@@ -34,7 +34,7 @@ router.post('/addBox', function (req, res, next) {
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
   '", "items": []' + 
-  ',},"geometry": {"type": "Point","coordinates": [7.595677971839904,51.96945543528874]}}]}'
+  '},"geometry": {"type": "Point","coordinates": [7.6110899448394775,51.96942238609061]}}]}'
 
   console.log(box)
   var obj = JSON.parse(box);

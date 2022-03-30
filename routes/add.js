@@ -28,12 +28,22 @@ router.post('/addBox', function (req, res, next) {
   var house_number = req.body.house_number
   var items = []
 
+  var box = '{"type": "FeatureCollection","features": [{"type": "Feature","properties": {"name":"' + name + 
+  '", "commentary":"' + commentary + 
+  '", "date":"' + date + 
+  '", "street":"' + street + 
+  '", "house_number":"' + house_number + 
+  '", "items": []' + 
+  ',},"geometry": {"type": "Point","coordinates": [7.595677971839904,51.96945543528874]}}]}'
+
+  console.log(box)
+  var obj = JSON.parse(box);
   //Check if Name exists
   client.connect(function(err) 
   {
     const db = client.db(dbName) //database
     const collection = db.collection(boxesCollection) //locations collection
-    collection.insertOne({name, commentary, date, street, house_number, items}, function(err, result) //insert new location into collection
+    collection.insertOne(obj, function(err, result) //insert new location into collection
           {
             res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
             return;

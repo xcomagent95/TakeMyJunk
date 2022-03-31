@@ -55,8 +55,6 @@ var drawControl = new L.Control.Draw({
     });
     
 
-    
-
     map.on('click', function(e){
 
     })
@@ -80,7 +78,28 @@ function getBoxes() {
         })
     }
 }  
-getBoxes(); //retrieve data
+getBoxes()
+console.log(boxes)
+
+function addBoxMarker () {
+    var lat;
+    var long;
+    var marker;
+    var boxIcon = L.icon({
+        iconUrl: 'g313.png',
+        iconSize:     [32, 37], // size of the icon
+        iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
+    for ( var i = 0; i<boxes.length;i++) {
+        lat = boxes[i].obj.features[0].geometry.coordinates[1];
+        long = boxes[i].obj.features[0].geometry.coordinates[0];
+        console.log(lat);
+        console.log(long);
+        marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+    }
+}
+addBoxMarker();
 
 function getItemFromForm() {
     var itemName = document.getElementById("itemName").value

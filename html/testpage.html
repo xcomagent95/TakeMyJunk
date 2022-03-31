@@ -18,6 +18,8 @@
    <script
         src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js">
     </script>
+   <script src="/jquery/dist/jquery.min.js"></script>
+
     <!--Include scripts:-->
     <script defer src="/map.js"></script>
     <title>Take My Junk</title>
@@ -38,30 +40,63 @@
     <div class="Btndiv">   
       <div>
         <form id="addBoxForm" action="/add/addBox" method="post">
-          <label for="fname">Name</label><br>
+          <label for="Name">Name</label><br>
           <input id="Name" name="name"><br>
-          <label for="fname">Kommentar</label><br>
-          <input id="Kommentar" name="commentary"><br>
-          <label for="fname">Datum</label><br>
-          <input id="Datum" name="date" type="date"><br>
-          <label for="fname">Strasse</label><br>
-          <input id="Strasse" name="street"><br>
-          <label for="fname">Hausnummer</label><br>
-          <input id="Hausnummer" name="house_number"><br>
-          <input type="submit" value="Submit">
-        </form> 
-      </div>
 
+          <label for="Kommentar">Kommentar</label><br>
+          <input id="Kommentar" name="commentary"><br>
+
+          <label for="Datum">Datum</label><br>
+          <input id="Datum" name="date" type="date"><br>
+
+          <label for="Strasse">Strasse</label><br>
+          <input id="Strasse" name="street"><br>
+
+          <label for="Hausnummer">Hausnummer</label><br>
+          <input id="Hausnummer" name="house_number"><br>
+
+          <input type="hidden" id="items" name="items" size="40"><br>
+
+          <input type="submit" value="Box hinzufuegen">
+        </form> 
+
+        <div>
+          <table id="itemsTable" class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Beschreibung</th>
+                  </tr>
+              </thead>
+              <tBody id="itemsTableBody"></tBody>
+          </table>    
+        </div>
+
+
+        <label for="itemName">Name</label><br>
+        <input id="itemName" name="street"><br>
+        <label for="descr">Beschreibung</label><br>
+        <input id="descr" name="descr"><br>
+        <button type="button" value="Item zu Box hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
+      </div>
       <div>
         <form id="removeBoxForm" action="/delete/removeBox" method="post">
           <label for="fname">Name</label><br>
           <input id="Name" name="name"><br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Löschen">
         </form> 
-      </div>            
-         <button id="addboxbutton">
-              add box
-         </button>
+      </div>   
+      
+      <div>
+        <form id="updateBoxForm" action="/update/updateBox" method="post">
+          <label for="oldName">editiertes Objekt</label><br>
+          <input id="oldName" name="oldName"><br>
+          <label for="newName">Neuer Name</label><br>
+          <input id="newName" name="newName"><br>
+          <input type="submit" value="Aktualisieren">
+        </form> 
+      </div>  
+         <button id="addboxbutton">add box</button>
     </div>
     <div id="mapcontainer">
         <div id="map"></div>

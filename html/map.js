@@ -85,11 +85,12 @@ function addBoxMarker () {
     var lat;
     var long;
     var marker;
+    var popupBoxContent;
     var boxIcon = L.icon({
         iconUrl: 'g313.png',
         iconSize:     [32, 37], // size of the icon
         iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
     });
     for ( var i = 0; i<boxes.length;i++) {
         lat = boxes[i].obj.features[0].geometry.coordinates[1];
@@ -97,6 +98,21 @@ function addBoxMarker () {
         console.log(lat);
         console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+        popupBoxContent = {
+            "name": boxes[i].name,
+            "comment": boxes[i].obj.features[0].properties.commentary,
+            "date": boxes[i].obj.features[0].properties.date,
+            "street": boxes[i].obj.features[0].properties.street,
+            "numer": boxes[i].obj.features[0].properties.house_number,
+            "items": boxes[i].obj.features[0].properties.items,
+        }
+        popupBoxContent = "Name: " +boxes[i].name +
+                        "<br> Comment: " + boxes[i].obj.features[0].properties.commentary+
+                        "<br> Date: " + boxes[i].obj.features[0].properties.date+
+                        "<br> Street: "+boxes[i].obj.features[0].properties.street+
+                        "<br> Street Number: "+boxes[i].obj.features[0].properties.house_number+
+                        "<br> Items: "+boxes[i].obj.features[0].properties.items
+        marker.bindPopup(popupBoxContent);
     }
 }
 addBoxMarker();

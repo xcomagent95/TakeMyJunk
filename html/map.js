@@ -85,7 +85,7 @@ var drawControl = new L.Control.Draw({
         // Do whatever else you need to. (save to db, add to map etc)
         map.addLayer(tempMarker);
     });
-    
+
     map.on('click', function(e){
 
     })
@@ -109,7 +109,48 @@ function getBoxes() {
         })
     }
 }  
-getBoxes(); //retrieve data
+getBoxes()
+console.log(boxes)
+
+function addBoxMarker () {
+    var lat;
+    var long;
+    var marker;
+    var popupBoxContent;
+    var boxIcon = L.icon({
+        iconUrl: 'g313.png',
+        iconSize:     [32, 37], // size of the icon
+        iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
+        popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
+    });
+    for ( var i = 0; i<boxes.length;i++) {
+        lat = boxes[i].obj.features[0].geometry.coordinates[1];
+        long = boxes[i].obj.features[0].geometry.coordinates[0];
+        console.log(lat);
+        console.log(long);
+        marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+        popupBoxContent = "<b>Name: </b>" +boxes[i].name +
+                        "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
+                        "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
+                        "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
+                        "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
+                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+  
+                        '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
+                        <br><label for="fname">Name</label><br>\
+                        <input id="Name" name="name"><br>\
+                        <input type="submit" value="Löschen">\
+                        </form>'+
+                        '<form id="updateBoxForm" action="/update/updateBox" method="post">\
+                        <br><label for="oldName">editiertes Objekt</label><br>\
+                        <input id="oldName" name="oldName"><br>\
+                        <label for="newName">Neuer Name</label><br>\
+                        <input id="newName" name="newName"><br>\
+                        <input type="submit" value="Aktualisieren">\
+                        </form>'
+        marker.bindPopup(popupBoxContent);
+    }
+}
+addBoxMarker();
 
 function getItemFromForm() {
     var itemName = document.getElementById("itemName").value

@@ -1,26 +1,18 @@
-.description {
+p {
     text-align: center;
     color: green;
     font-size: large;
-    vertical-align: middle;
-}
-.impressum{
-    text-align: center;
-    color: black;
-    font-size: medium;
 }
 
-.Btndiv{
-    text-align: center;
-    padding: 10px;
+.description{
+  position: relative;
+  height: 10%;
 }
+
 h1 {
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
     color: black;
-}
-h3{
-    text-align: center;
 }
 
 html, body{
@@ -28,34 +20,30 @@ html, body{
     width: 100%;
 }
 
-
-#mapcontainer{
-    position: relative;
+#wrapper{
+    height: 80%;
     width: 100%;
-    height: 55%;
-    left: 10%;
+    border: 1px solid black;
+    overflow: hidden;
+}
+#map { 
+    height: 50%;
+    width: 80%;
+    float: left;
 }
 
-#map { 
-    position: absolute;
-    width: 80%;
-    height: 100%;
+#Createbutton{
+    float: left;
+
 }
 
 #addboxbutton {
         background-color: blue;
-        width: 100px;
+        width: 200px;
         font-size: 20px;
         padding: 10px;
         border-radius: 5px;
         border: 3px solid yellow;
         color: white;
         cursor: pointer;
-}
-
-img{
-    width: 17%;
-    height:17%;
-    float: right;
-    margin-right: 5%;
 }

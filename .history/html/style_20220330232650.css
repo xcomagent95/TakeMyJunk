@@ -1,0 +1,19 @@
+
+p {
+    text-align: center;
+    color: green;
+}
+
+.description{
+    background-image: url('/g313.png');
+}
+
+h1 {
+    color: green;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+#map { height: 180px; }

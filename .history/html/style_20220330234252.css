@@ -1,0 +1,27 @@
+p {
+    text-align: center;
+    color: green;
+}
+
+.vertical-center{
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: black;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+#map { 
+    height: 50%;
+    width: 80%;
+    margin-left: 5%; 
+}

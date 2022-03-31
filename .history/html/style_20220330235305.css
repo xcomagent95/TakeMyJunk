@@ -1,0 +1,37 @@
+p {
+    text-align: center;
+    color: green;
+    font-size: 18;
+}
+
+.description{
+  position: relative;
+  height: 10%;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: black;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+#map { 
+    height: 50%;
+    width: 80%;
+    margin-left: 5%; 
+}
+
+#addboxbutton {
+        background-color: blue;
+        width: 200px;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 3px solid yellow;
+        color: white;
+        cursor: pointer;
+}

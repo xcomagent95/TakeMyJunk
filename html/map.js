@@ -6,19 +6,19 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-var popupContent =  '<form id="addBoxForm" action="/add/addBox" method="post">'+
-'<label for="fname">Name</label><br>'+
-'<input id="Name" name="name"><br>'+
-'<label for="fname">Kommentar</label><br>'+
-'<input id="Kommentar" name="commentary"><br>'+
-'<label for="fname">Datum</label><br>'+
-'<input id="Datum" name="date" type="date"><br>'+
-'<label for="fname">Strasse</label><br>'+
-'<input id="Strasse" name="street"><br>'+
-'<label for="fname">Hausnummer</label><br>'+
-'<input id="Hausnummer" name="house_number"><br>'+
-'<input type="submit" value="Submit">'+
-'</form>';
+// var popupContent =  '<form id="addBoxForm" action="/add/addBox" method="post">'+
+// '<label for="fname">Name</label><br>'+
+// '<input id="Name" name="name"><br>'+
+// '<label for="fname">Kommentar</label><br>'+
+// '<input id="Kommentar" name="commentary"><br>'+
+// '<label for="fname">Datum</label><br>'+
+// '<input id="Datum" name="date" type="date"><br>'+
+// '<label for="fname">Strasse</label><br>'+
+// '<input id="Strasse" name="street"><br>'+
+// '<label for="fname">Hausnummer</label><br>'+
+// '<input id="Hausnummer" name="house_number"><br>'+
+// '<input type="submit" value="Submit">'+
+// '</form>';
 var drawnItems = new L.FeatureGroup().addTo(map);
 var drawControl = new L.Control.Draw({
          draw: {
@@ -37,12 +37,28 @@ var drawControl = new L.Control.Draw({
       map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);
         var coordinates = e.layer._latlng;
-        console.log(tempMarker);
         console.log(coordinates);
-        tempMarker.bindPopup(popupContent,{
+        var popupContent =  '<form id="addBoxForm" action="/add/addBox" method="post">'+
+'<label for="fname">Name</label><br>'+
+'<input id="Name" name="name"><br>'+
+'<label for="fname">Kommentar</label><br>'+
+'<input id="Kommentar" name="commentary"><br>'+
+'<label for="fname">Datum</label><br>'+
+'<input id="Datum" name="date" type="date"><br>'+
+'<label for="fname">Strasse</label><br>'+
+'<input id="Strasse" name="street"><br>'+
+'<label for="fname">Hausnummer</label><br>'+
+'<input id="Hausnummer" name="house_number"><br>'+
+'<input type="submit" value="Submit">'+
+'<input style="display: none;" id="coordinates" type ="text" value="'+coordinates+'">'+
+'</form>';
+            console.log(popupContent);
+            
+            tempMarker.bindPopup(popupContent,{
             keepInView: true,
             closeButton: false
             }).openPopup(); 
+    
     
         //   if (type === 'marker') {
             

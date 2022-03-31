@@ -117,7 +117,6 @@ function addBoxMarker () {
     var marker;
     var popupBoxContent;
     var items;
-    var itemsNames;
     var boxIcon = L.icon({
         iconUrl: 'g313.png',
         iconSize:     [32, 37], // size of the icon
@@ -130,12 +129,15 @@ function addBoxMarker () {
         console.log(lat);
         console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
-        /**  get array with items
-        items = boxes[i].obj.features[0].properties.items;
+        // get array with items
+        items = boxes[i].items;
+        var itemsNames = [items[0].name];
         // extract only names from items and save in array
         for (var j=0; j<items.length; j++) {
+            if (j != 0) {
             itemsNames = [itemsNames, items[j].name];
-        };**/
+            }
+        };
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+

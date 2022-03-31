@@ -74,7 +74,7 @@ var drawControl = new L.Control.Draw({
             
             tempMarker.bindPopup(popupContent,{
             keepInView: true,
-            closeButton: false
+            closeButton: true
             }).openPopup(); 
     
     

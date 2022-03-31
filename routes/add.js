@@ -28,7 +28,18 @@ router.post('/addBox', function (req, res, next) {
   var street = req.body.street
   var house_number = req.body.house_number
   var coordinates = req.body.coordinates
+
+  var randomnumber = Math.floor((Math.random() * 1000) + 1);
+  console.log(randomnumber);
   console.log(coordinates);
+
+  console.log(randomnumber);
+  var cookie = require('cookie');
+  var setCookie = cookie.serialize('rn', randomnumber);
+
+ console.log(setCookie);
+
+
 
   var items = JSON.parse('[' + req.body.items.slice(0, -1) + ']')
 
@@ -55,7 +66,7 @@ router.post('/addBox', function (req, res, next) {
         return;
       } else {
         //Insert the document in the database
-        collection.insertOne({name, obj, items}, function(err, result) //insert new location into collection
+        collection.insertOne({name, obj, items, randomnumber}, function(err, result) //insert new location into collection
         {
           res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
           return;

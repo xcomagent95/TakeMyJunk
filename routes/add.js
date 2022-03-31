@@ -26,7 +26,7 @@ router.post('/addBox', function (req, res, next) {
   var date = req.body.date
   var street = req.body.street
   var house_number = req.body.house_number
-  var items = []
+  var items = JSON.parse('[' + req.body.items.slice(0, -1) + ']')
 
   var box = '{"type": "FeatureCollection","features": [{"type": "Feature","properties": {"commentary":"' + commentary + 
   '", "date":"' + date + 

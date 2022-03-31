@@ -98,20 +98,24 @@ function addBoxMarker () {
         console.log(lat);
         console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
-        popupBoxContent = {
-            "name": boxes[i].name,
-            "comment": boxes[i].obj.features[0].properties.commentary,
-            "date": boxes[i].obj.features[0].properties.date,
-            "street": boxes[i].obj.features[0].properties.street,
-            "numer": boxes[i].obj.features[0].properties.house_number,
-            "items": boxes[i].obj.features[0].properties.items,
-        }
-        popupBoxContent = "Name: " +boxes[i].name +
-                        "<br> Comment: " + boxes[i].obj.features[0].properties.commentary+
-                        "<br> Date: " + boxes[i].obj.features[0].properties.date+
-                        "<br> Street: "+boxes[i].obj.features[0].properties.street+
-                        "<br> Street Number: "+boxes[i].obj.features[0].properties.house_number+
-                        "<br> Items: "+boxes[i].obj.features[0].properties.items
+        popupBoxContent = "<b>Name: </b>" +boxes[i].name +
+                        "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
+                        "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
+                        "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
+                        "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
+                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+  
+                        '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
+                        <br><label for="fname">Name</label><br>\
+                        <input id="Name" name="name"><br>\
+                        <input type="submit" value="Löschen">\
+                        </form>'+
+                        '<form id="updateBoxForm" action="/update/updateBox" method="post">\
+                        <br><label for="oldName">editiertes Objekt</label><br>\
+                        <input id="oldName" name="oldName"><br>\
+                        <label for="newName">Neuer Name</label><br>\
+                        <input id="newName" name="newName"><br>\
+                        <input type="submit" value="Aktualisieren">\
+                        </form>'
         marker.bindPopup(popupBoxContent);
     }
 }

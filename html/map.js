@@ -1,5 +1,5 @@
 // Initialize the map and set coordinates and zoom
-var map = L.map('map', {drawControl: true}).setView([51.96, 7.63], 12);
+var map = L.map('map').setView([51.96, 7.63], 12);
 
 // Add tile layer with map from OpenStreetMap
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -19,20 +19,22 @@ var popupContent =  '<form id="addBoxForm" action="/add/addBox" method="post">'+
 '<input id="Hausnummer" name="house_number"><br>'+
 '<input type="submit" value="Submit">'+
 '</form>';
+
 var drawnItems = new L.FeatureGroup().addTo(map);
 var drawControl = new L.Control.Draw({
          draw: {
              polygon: false,
-             circle:false,
-             circlemarker:false,
-             polyline:false,
-             rectangle:false
+             circle: false,
+             circlemarker: false,
+             polyline: false,
+             rectangle: false
          },
           edit: {
-              featureGroup: drawnItems
+              featureGroup: drawnItems,
+              edit: false,
+              remove: false
           }
-      });
-      drawControl.addTo(map);
+      }).addTo(map);
 
       map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);

@@ -16,8 +16,8 @@ app.use(express.urlencoded());
 app.listen(3000, () => console.log('Example app is listening on port 3000.'));
 
 //Folders
-app.use(express.static(__dirname + './html')); //define html folder
-app.use(express.static(__dirname + './routes')); //define router folder
+app.use(express.static(__dirname + '/html')); //define html folder
+app.use(express.static(__dirname + '/routes')); //define router folder
 
 //Routers
 var addBoxRouter = require(__dirname + '/routes/add.js'); //require search router

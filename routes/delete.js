@@ -34,11 +34,11 @@ router.post('/removeBox', function (req, res, next) {
             if(docs.length >= 1){ //if the locations exists and is not in use
                 collection.deleteOne({name: boxName}, function(err, results){ //delte the location from the locations collection
                 })
-                res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
+                res.send(`You still wanna use use your junk? Fine then!`)
                 return;
               }
             else { //if the location does not exist
-                res.sendFile(__dirname + "/done.html"); //send nonexistent location error
+              res.send(`Woah slow down partner! Things went wild here!`)
                 return;
             }
         })

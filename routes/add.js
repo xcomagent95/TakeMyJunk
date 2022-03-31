@@ -26,15 +26,21 @@ router.post('/addBox', function (req, res, next) {
   var date = req.body.date
   var street = req.body.street
   var house_number = req.body.house_number
+  var coordinates = req.body.coordinates
+
+  var randomnumber = Math.floor((Math.random() * 1000) + 1);
+
   var items = JSON.parse('[' + req.body.items.slice(0, -1) + ']')
 
   var box = '{"type": "FeatureCollection","features": [{"type": "Feature","properties": {"commentary":"' + commentary + 
   '", "date":"' + date + 
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
-  '"},"geometry": {"type": "Point","coordinates": [7.6110899448394775,51.96942238609061]}}]}'
+  '"},"geometry": {"type": "Point","coordinates": '+coordinates+'}}]}'
 
-  console.log(box)
+  console.log("box");
+  console.log(box);
+
   var obj = JSON.parse(box);
   //Check if Name exists
   client.connect(function(err) 
@@ -45,13 +51,13 @@ router.post('/addBox', function (req, res, next) {
     collection.find({name: name}).toArray(function(err, docs)
     {
       if(docs.length >= 1) { //if a location with the same locationID already exists
-        res.sendFile(__dirname + "/error.html"); //send a redundant key error
+        res.send(`Woah slow down partner! Things went wild here!`)
         return;
       } else {
         //Insert the document in the database
-        collection.insertOne({name, obj, items}, function(err, result) //insert new location into collection
+        collection.insertOne({name, obj, items, randomnumber}, function(err, result) //insert new location into collection
         {
-          res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
+          res.send(`Congrats! You posted your junk! Your ID is: ` + JSON.stringify(randomnumber) + `<br><br><form action="/test"><input type="submit" value="Zur Übersicht" /></form>`)
           return;
          })
     }

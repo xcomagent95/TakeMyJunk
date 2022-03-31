@@ -36,7 +36,7 @@ router.post('/addBox', function (req, res, next) {
   '", "date":"' + date + 
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
-  '"},"geometry": {"type": "Point","coordinates": '+coordinates+'}}]}'
+  '"},"geometry": {"type": "Point","coordinates": ' + coordinates + '}}]}'
 
   console.log("box");
   console.log(box);

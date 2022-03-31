@@ -28,7 +28,6 @@ var drawControl = new L.Control.Draw({
         var popupContent =  `<div>   
 <div>
   <form id="addBoxForm" action="/add/addBox" method="post">
-    <input type="submit" value="Box hinzufuegen">
     <br></br>
     <label for="Name">Name</label><br>
     <input id="Name" name="name"><br>
@@ -49,6 +48,7 @@ var drawControl = new L.Control.Draw({
 
     <label for="Koordinaten">Koordinaten</label><br>
     <input id="Koordinaten" name="coordinates" value="[` + coordinates.lng + `,` +  coordinates.lat + `]" readonly>'
+    <input type="submit" value="Box hinzufuegen">
   </form> 
 
   <div>
@@ -69,9 +69,7 @@ var drawControl = new L.Control.Draw({
   <label for="descr">Beschreibung</label><br>
   <input id="descr" name="descr"><br>
   <button type="button" value="Item zu Box hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
-</div>`;
-            console.log(popupContent);
-            
+</div>`;    
             tempMarker.bindPopup(popupContent,{
             keepInView: true,
             closeButton: true

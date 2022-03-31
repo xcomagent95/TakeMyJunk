@@ -28,8 +28,7 @@ router.post('/addBox', function (req, res, next) {
   var house_number = req.body.house_number
   var items = []
 
-  var box = '{"type": "FeatureCollection","features": [{"type": "Feature","properties": {"name":"' + name + 
-  '", "commentary":"' + commentary + 
+  var box = '{"type": "FeatureCollection","features": [{"type": "Feature","properties": {"commentary":"' + commentary + 
   '", "date":"' + date + 
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
@@ -43,7 +42,7 @@ router.post('/addBox', function (req, res, next) {
   {
     const db = client.db(dbName) //database
     const collection = db.collection(boxesCollection) //locations collection
-    collection.insertOne(obj, function(err, result) //insert new location into collection
+    collection.insertOne({name, obj}, function(err, result) //insert new location into collection
           {
             res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
             return;

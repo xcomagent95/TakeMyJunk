@@ -33,8 +33,5 @@ app.use('/update', updateBoxRouter); //instruct the server to use the router
 var searchBoxRouter = require(__dirname + '/routes/search.js'); //require search router
 app.use('/search', searchBoxRouter); //instruct the server to use the router
 
-
-
-
 //Gets for webpages to be hosted
 app.get("/test", (req, res) => { res.sendFile(__dirname + "/html/testpage.html"); });

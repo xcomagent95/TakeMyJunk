@@ -35,4 +35,20 @@ function getItemFromForm() {
     var newItems = existingItems + '{"name":"' + itemName + '", "description":"' + description + '"},'
 
     document.getElementById("items").value = newItems
+    buildItemTable()
+}
+
+function buildItemTable() {
+    var items = JSON.parse('[' + document.getElementById("items").value.slice(0, -1) + ']')
+    var table = document.getElementById('itemsTableBody'); //get the the table containing the locations
+    for(var i = 0; i < items.length; i++) { //iterate over table data
+        //initialize table row as variable
+        var row =  `<tr scope="row">
+                        <td>${items[i].name}</td>
+                        <td>${items[i].description}</td>
+                        <td><button type="button">Item löschen</button></td>
+                    </tr>`
+        table.innerHTML += row; //pass row into given table
+    }
+
 }

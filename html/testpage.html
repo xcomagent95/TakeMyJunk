@@ -49,13 +49,27 @@
 
           <input type="hidden" id="items" name="items" size="40"><br>
 
-          <input type="submit" value="Hinzufuegen">
+          <input type="submit" value="Box hinzufuegen">
         </form> 
-          <label for="itemName">Name</label><br>
-          <input id="itemName" name="street"><br>
-          <label for="descr">Beschreibung</label><br>
-          <input id="descr" name="descr"><br>
-          <button type="button" value="Hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
+
+        <div>
+          <table id="itemsTable" class="table">
+              <thead>
+                  <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Beschreibung</th>
+                  </tr>
+              </thead>
+              <tBody id="itemsTableBody"></tBody>
+          </table>    
+        </div>
+
+
+        <label for="itemName">Name</label><br>
+        <input id="itemName" name="street"><br>
+        <label for="descr">Beschreibung</label><br>
+        <input id="descr" name="descr"><br>
+        <button type="button" value="Item zu Box hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
       </div>
       <div>
         <form id="removeBoxForm" action="/delete/removeBox" method="post">
@@ -74,9 +88,7 @@
           <input type="submit" value="Aktualisieren">
         </form> 
       </div>  
-         <button id="addboxbutton">
-              add box
-         </button>
+         <button id="addboxbutton">add box</button>
     </div>
     <div id="mapcontainer">
         <div id="map"></div>

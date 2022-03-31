@@ -25,10 +25,11 @@ var drawControl = new L.Control.Draw({
       map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);
         var coordinates = e.layer._latlng;
-        console.log(coordinates);
         var popupContent =  `<div>   
 <div>
   <form id="addBoxForm" action="/add/addBox" method="post">
+    <input type="submit" value="Box hinzufuegen">
+    <br></br>
     <label for="Name">Name</label><br>
     <input id="Name" name="name"><br>
 
@@ -46,7 +47,8 @@ var drawControl = new L.Control.Draw({
 
     <input type="hidden" id="items" name="items" size="40"><br>
 
-    <input type="submit" value="Box hinzufuegen">
+    <label for="Koordinaten">Koordinaten</label><br>
+    <input id="Koordinaten" name="coordinates" value="[` + coordinates.lng + `,` +  coordinates.lat + `]" readonly>'
   </form> 
 
   <div>
@@ -72,7 +74,7 @@ var drawControl = new L.Control.Draw({
             
             tempMarker.bindPopup(popupContent,{
             keepInView: true,
-            closeButton: false
+            closeButton: true
             }).openPopup(); 
     
     

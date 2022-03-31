@@ -27,6 +27,9 @@ app.use('/add', addBoxRouter); //instruct the server to use the router
 var removeBoxRouter = require(__dirname + '/routes/delete.js'); //require search router
 app.use('/delete', removeBoxRouter); //instruct the server to use the router
 
+var updateBoxRouter = require(__dirname + '/routes/update.js'); //require search router
+app.use('/update', updateBoxRouter); //instruct the server to use the router
+
 
 
 //Gets for webpages to be hosted

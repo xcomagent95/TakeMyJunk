@@ -32,8 +32,7 @@ router.post('/addBox', function (req, res, next) {
   '", "date":"' + date + 
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
-  '", "items": []' + 
-  '},"geometry": {"type": "Point","coordinates": [7.6110899448394775,51.96942238609061]}}]}'
+  '"},"geometry": {"type": "Point","coordinates": [7.6110899448394775,51.96942238609061]}}]}'
 
   console.log(box)
   var obj = JSON.parse(box);
@@ -42,12 +41,21 @@ router.post('/addBox', function (req, res, next) {
   {
     const db = client.db(dbName) //database
     const collection = db.collection(boxesCollection) //locations collection
-    collection.insertOne({name, obj}, function(err, result) //insert new location into collection
-          {
-            res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
-            return;
-           })
-  }) 
+
+    collection.find({name: name}).toArray(function(err, docs)
+    {
+      if(docs.length >= 1) { //if a location with the same locationID already exists
+        res.sendFile(__dirname + "/error.html"); //send a redundant key error
+        return;
+      } else {
+        //Insert the document in the database
+        collection.insertOne({name, obj, items}, function(err, result) //insert new location into collection
+        {
+          res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
+          return;
+         })
+    }
+  }) })
 });
 
 module.exports = router; //export as router

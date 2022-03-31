@@ -28,7 +28,30 @@
         </p>
     </div>
     </div>  
-    <div class="Btndiv">               
+    <div class="Btndiv">   
+      <div>
+        <form id="addBoxForm" action="/add/addBox" method="post">
+          <label for="fname">Name</label><br>
+          <input id="Name" name="name"><br>
+          <label for="fname">Kommentar</label><br>
+          <input id="Kommentar" name="commentary"><br>
+          <label for="fname">Datum</label><br>
+          <input id="Datum" name="date" type="date"><br>
+          <label for="fname">Strasse</label><br>
+          <input id="Strasse" name="street"><br>
+          <label for="fname">Hausnummer</label><br>
+          <input id="Hausnummer" name="house_number"><br>
+          <input type="submit" value="Submit">
+        </form> 
+      </div>
+
+      <div>
+        <form id="removeBoxForm" action="/delete/removeBox" method="post">
+          <label for="fname">Name</label><br>
+          <input id="Name" name="name"><br>
+          <input type="submit" value="Submit">
+        </form> 
+      </div>            
          <button id="addboxbutton">
               add box
          </button>
@@ -47,3 +70,4 @@
     </footer>
 </body>
 </html>
+

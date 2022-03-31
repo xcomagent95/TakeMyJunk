@@ -132,7 +132,13 @@ function addBoxMarker () {
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items
+                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+
+                        "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
+                        "<br>"+
+                        "<input id='userKey'></input>"+
+                        "<button type='button' value='Item zu Box hinzufuegen' onclick='unlockBox()'>Unlock Box</button>"+
+                        "<br>"+
+                        "<div id='info'></div>"
         marker.bindPopup(popupBoxContent);
     }
 }
@@ -158,13 +164,12 @@ function deleteItemFromTable(i){
         string += JSON.stringify(items[i])
         string += ','    
     }
-    console.log(string)
     document.getElementById("items").value += string 
     buildItemTable()
 }
 
 function buildItemTable() {
-    console.log(document.getElementById("items").value)
+    //console.log(document.getElementById("items").value)
     var items = JSON.parse('[' + document.getElementById("items").value.slice(0, -1) + ']')
     var table = document.getElementById('itemsTableBody'); //get the the table containing the locations
     table.innerHTML = ""
@@ -176,5 +181,17 @@ function buildItemTable() {
                         <td><button type="button" onclick="deleteItemFromTable(` + i + `)">Item löschen</button></td>
                     </tr>`
         table.innerHTML += row; //pass row into given table
+    }
+}
+
+function unlockBox() {
+    var key = document.getElementById('key').value
+    var userKey = document.getElementById('userKey').value
+
+    if(key == userKey) {
+        document.getElementById('info').innerHTML = "Howdy partner! You seem to be allright..take what you need!"
+    } 
+    else {
+        document.getElementById('info').innerHTML = "Oh boy! You seem to be a Stranger round here...better get lost!"
     }
 }

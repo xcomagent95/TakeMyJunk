@@ -28,7 +28,7 @@ router.post('/addBox', function (req, res, next) {
   var house_number = req.body.house_number
   var coordinates = req.body.coordinates
 
-  var randomnumber = Math.floor((Math.random() * 1000) + 1);
+  var key = Math.floor((Math.random() * 1000) + 1);
 
   var items = JSON.parse('[' + req.body.items.slice(0, -1) + ']')
 
@@ -37,9 +37,6 @@ router.post('/addBox', function (req, res, next) {
   '", "street":"' + street + 
   '", "house_number":"' + house_number + 
   '"},"geometry": {"type": "Point","coordinates": ' + coordinates + '}}]}'
-
-  console.log("box");
-  console.log(box);
 
   var obj = JSON.parse(box);
   //Check if Name exists
@@ -55,9 +52,9 @@ router.post('/addBox', function (req, res, next) {
         return;
       } else {
         //Insert the document in the database
-        collection.insertOne({name, obj, items, randomnumber}, function(err, result) //insert new location into collection
+        collection.insertOne({name, obj, items, key}, function(err, result) //insert new location into collection
         {
-          res.send(`Congrats! You posted your junk! Your ID is: ` + JSON.stringify(randomnumber) + `<br><br><form action="/test"><input type="submit" value="Zur Übersicht" /></form>`)
+          res.send(`Congrats! You posted your junk! Your ID is: ` + JSON.stringify(key) + `<br><br><form action="/test"><input type="submit" value="Zur Übersicht" /></form>`)
           return;
          })
     }

@@ -1,0 +1,37 @@
+.description {
+    text-align: center;
+    color: green;
+    font-size: large;
+}
+.impressum{
+    text-align: center;
+    color: black;
+    font-size: medium;
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: black;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
+#map { 
+    height: 50%;
+    width: 80%;
+    float: left;
+}
+
+#addboxbutton {
+        background-color: blue;
+        width: 100px;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 3px solid yellow;
+        color: white;
+        cursor: pointer;
+}

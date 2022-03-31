@@ -1,0 +1,29 @@
+p {
+    text-align: center;
+    color: green;
+}
+
+.description{
+  position: relative;
+  height: 10%;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: black;
+}
+
+html, body{
+    height: 100%;
+    width: 100%;
+}
+#map { 
+    height: 50%;
+    width: 80%;
+    margin-left: 5%; 
+}
+
+button {
+    align-self: center;
+}

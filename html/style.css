@@ -1,8 +1,16 @@
 .description {
+    position: absolute;
+    width: 100%;
     text-align: center;
-    color: green;
+    color: darkgreen;
     font-size: large;
     vertical-align: middle;
+}
+.description-container{
+    position: relative;
+    left: 30px;
+    width: 80%;
+    height: 25%;
 }
 .impressum{
     text-align: center;
@@ -26,12 +34,13 @@ h3{
 html, body{
     height: 100%;
     width: 100%;
+    background-color: beige;
 }
 
 
 #mapcontainer{
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 55%;
     left: 10%;
 }
@@ -54,7 +63,7 @@ html, body{
 }
 
 img{
-    width: 17%;
+    width: 10%;
     height:17%;
     float: right;
     margin-right: 5%;

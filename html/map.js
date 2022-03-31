@@ -6,20 +6,6 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-var popupContent =  '<form id="addBoxForm" action="/add/addBox" method="post">'+
-'<label for="fname">Name</label><br>'+
-'<input id="Name" name="name"><br>'+
-'<label for="fname">Kommentar</label><br>'+
-'<input id="Kommentar" name="commentary"><br>'+
-'<label for="fname">Datum</label><br>'+
-'<input id="Datum" name="date" type="date"><br>'+
-'<label for="fname">Strasse</label><br>'+
-'<input id="Strasse" name="street"><br>'+
-'<label for="fname">Hausnummer</label><br>'+
-'<input id="Hausnummer" name="house_number"><br>'+
-'<input type="submit" value="Submit">'+
-'</form>';
-
 var drawnItems = new L.FeatureGroup().addTo(map);
 var drawControl = new L.Control.Draw({
          draw: {
@@ -39,12 +25,56 @@ var drawControl = new L.Control.Draw({
       map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);
         var coordinates = e.layer._latlng;
-        console.log(tempMarker);
         console.log(coordinates);
-        tempMarker.bindPopup(popupContent,{
+        var popupContent =  `<div>   
+<div>
+  <form id="addBoxForm" action="/add/addBox" method="post">
+    <label for="Name">Name</label><br>
+    <input id="Name" name="name"><br>
+
+    <label for="Kommentar">Kommentar</label><br>
+    <input id="Kommentar" name="commentary"><br>
+
+    <label for="Datum">Datum</label><br>
+    <input id="Datum" name="date" type="date"><br>
+
+    <label for="Strasse">Strasse</label><br>
+    <input id="Strasse" name="street"><br>
+
+    <label for="Hausnummer">Hausnummer</label><br>
+    <input id="Hausnummer" name="house_number"><br>
+
+    <input type="hidden" id="items" name="items" size="40"><br>
+
+    <input type="submit" value="Box hinzufuegen">
+  </form> 
+
+  <div>
+    <table id="itemsTable" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Beschreibung</th>
+            </tr>
+        </thead>
+        <tBody id="itemsTableBody"></tBody>
+    </table>    
+  </div>
+
+
+  <label for="itemName">Name</label><br>
+  <input id="itemName" name="street"><br>
+  <label for="descr">Beschreibung</label><br>
+  <input id="descr" name="descr"><br>
+  <button type="button" value="Item zu Box hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
+</div>`;
+            console.log(popupContent);
+            
+            tempMarker.bindPopup(popupContent,{
             keepInView: true,
             closeButton: false
             }).openPopup(); 
+    
     
         //   if (type === 'marker') {
             
@@ -54,7 +84,6 @@ var drawControl = new L.Control.Draw({
         map.addLayer(tempMarker);
     });
     
-
     map.on('click', function(e){
 
     })
@@ -86,6 +115,8 @@ function addBoxMarker () {
     var long;
     var marker;
     var popupBoxContent;
+    var items;
+    var itemsNames;
     var boxIcon = L.icon({
         iconUrl: 'g313.png',
         iconSize:     [32, 37], // size of the icon
@@ -98,12 +129,18 @@ function addBoxMarker () {
         console.log(lat);
         console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+        /**  get array with items
+        items = boxes[i].obj.features[0].properties.items;
+        // extract only names from items and save in array
+        for (var j=0; j<items.length; j++) {
+            itemsNames = [itemsNames, items[j].name];
+        };**/
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+  
+                        "<br> <b>Items: </b>"+itemsNames+  
                         '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
                         <br><label for="fname">Name</label><br>\
                         <input id="Name" name="name"><br>\
@@ -132,17 +169,32 @@ function getItemFromForm() {
     buildItemTable()
 }
 
+function deleteItemFromTable(i){
+    var items = JSON.parse('[' + document.getElementById("items").value.slice(0, -1) + ']')
+    items.splice(i, 1)
+    document.getElementById("items").value = ""
+    var string = ""
+    for(var i = 0; i < items.length; i++) { //iterate over table data
+        string += JSON.stringify(items[i])
+        string += ','    
+    }
+    console.log(string)
+    document.getElementById("items").value += string 
+    buildItemTable()
+}
+
 function buildItemTable() {
+    console.log(document.getElementById("items").value)
     var items = JSON.parse('[' + document.getElementById("items").value.slice(0, -1) + ']')
     var table = document.getElementById('itemsTableBody'); //get the the table containing the locations
+    table.innerHTML = ""
     for(var i = 0; i < items.length; i++) { //iterate over table data
         //initialize table row as variable
         var row =  `<tr scope="row">
                         <td>${items[i].name}</td>
                         <td>${items[i].description}</td>
-                        <td><button type="button">Item löschen</button></td>
+                        <td><button type="button" onclick="deleteItemFromTable(` + i + `)">Item löschen</button></td>
                     </tr>`
         table.innerHTML += row; //pass row into given table
     }
-
 }

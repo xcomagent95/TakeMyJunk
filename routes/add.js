@@ -20,7 +20,6 @@ const client = new MongoClient(url) // mongodb client
 router.post('/addBox', function (req, res, next) {
 
   console.log("Submitted a Box!")
-  console.log(req.body)
 
   var name = req.body.name
   var commentary = req.body.commentary
@@ -30,16 +29,6 @@ router.post('/addBox', function (req, res, next) {
   var coordinates = req.body.coordinates
 
   var randomnumber = Math.floor((Math.random() * 1000) + 1);
-  console.log(randomnumber);
-  console.log(coordinates);
-
-  console.log(randomnumber);
-  var cookie = require('cookie');
-  var setCookie = cookie.serialize('rn', randomnumber);
-
- console.log(setCookie);
-
-
 
   var items = JSON.parse('[' + req.body.items.slice(0, -1) + ']')
 
@@ -62,13 +51,13 @@ router.post('/addBox', function (req, res, next) {
     collection.find({name: name}).toArray(function(err, docs)
     {
       if(docs.length >= 1) { //if a location with the same locationID already exists
-        res.sendFile(__dirname + "/error.html"); //send a redundant key error
+        res.send(`Woah slow down partner! Things went wild here!`)
         return;
       } else {
         //Insert the document in the database
         collection.insertOne({name, obj, items, randomnumber}, function(err, result) //insert new location into collection
         {
-          res.sendFile(__dirname + "/done.html"); //send positive response -> the post operation war successful
+          res.send(`Congrats! You posted your junk! Your ID is: ` + JSON.stringify(randomnumber) + `<br><br><form action="/test"><input type="submit" value="Zur Übersicht" /></form>`)
           return;
          })
     }

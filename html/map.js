@@ -134,19 +134,7 @@ function addBoxMarker () {
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+  
-                        '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
-                        <br><label for="fname">Name</label><br>\
-                        <input id="Name" name="name"><br>\
-                        <input type="submit" value="Löschen">\
-                        </form>'+
-                        '<form id="updateBoxForm" action="/update/updateBox" method="post">\
-                        <br><label for="oldName">editiertes Objekt</label><br>\
-                        <input id="oldName" name="oldName"><br>\
-                        <label for="newName">Neuer Name</label><br>\
-                        <input id="newName" name="newName"><br>\
-                        <input type="submit" value="Aktualisieren">\
-                        </form>'
+                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items
         marker.bindPopup(popupBoxContent);
     }
 }

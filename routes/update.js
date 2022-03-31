@@ -34,12 +34,12 @@ router.post('/updateBox', function (req, res, next) {
       if(docs.length >= 1) { //if a location with the same locationID already exists
         collection.updateOne({name: oldName}, {$set:{name: newName}}, function(err, result) 
               {
-                res.sendFile(__dirname + "/done.html"); //send a redundant key error
+                res.send(`More junk? Where did you get all this stuff?`)
                 return;
               })
         
             } else {
-              res.sendFile(__dirname + "/error.html"); //send a redundant key error
+              res.send(`Woah slow down partner! Things went wild here!`)
               return;
     }
   }) })

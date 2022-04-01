@@ -62,11 +62,11 @@ router.post('/removeItemfromBox', function (req, res, next) {
       if(docs.length >= 1) { //if a location with the same locationID already exists
         collection.updateOne({name: box}, {$set:{items: newItems}}, function(err, result) 
               {
-                res.send(`Hey hey hey! You now own a new items!`)
+                res.send(`Hey hey hey! You now own a new items! <br><br><form action="/test"><input type="submit" value="Zur Übersicht" />`)
                 return;
               })
             } else {
-              res.send(`Woah slow down partner! Things went wild here!`)
+              res.send(`Woah slow down partner! Things went wild here! <br><br><form action="/test"><input type="submit" value="Zur Übersicht" />`)
               return;
     }
   }) })

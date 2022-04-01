@@ -31,5 +31,4 @@ router.get('/getBoxes', function(req, res, next)
     })
   })
 });
-
 module.exports = router; //export as router

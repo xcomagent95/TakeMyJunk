@@ -43,7 +43,6 @@ router.post('/updateBox', function (req, res, next) {
               return;
     }
   }) })
- 
 });
 
 router.post('/removeItemfromBox', function (req, res, next) {

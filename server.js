@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const request = require('request');
 const app = express();
 
 app.get('/', (req, res) => {
@@ -8,6 +9,10 @@ app.get('/', (req, res) => {
 
 const port = 3000; //define port via which the application will be accessable
 const bodyParser = require('body-parser'); 
+
+let apiKey = '985b7a47a9d9f0f648c09350682d585d';
+let city = 'muenster';
+let url = 'http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}';
 
 //Parser for Requests
 app.use(express.json()); 
@@ -35,3 +40,15 @@ app.use('/search', searchBoxRouter); //instruct the server to use the router
 
 //Gets for webpages to be hosted
 app.get("/test", (req, res) => { res.sendFile(__dirname + "/html/testpage.html"); });
+
+app.get('/weather', (req , res) => {
+  request(url, function (err, response, body) {
+       if(err){
+         console.log('error:', error);
+       } else {
+         let weather = JSON.parse(body)
+         let message = "It's ${weather.main.temp} degrees in ${weather.name}!";
+         res.send(message);
+       }
+     });
+})

@@ -116,7 +116,7 @@ function addBoxMarker () {
     var marker;
     var popupBoxContent;
     var boxIcon = L.icon({
-        iconUrl: 'g313.png',
+        iconUrl: 'marker100p.png',
         iconSize:     [32, 37], // size of the icon
         iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
         popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
@@ -124,9 +124,8 @@ function addBoxMarker () {
     for ( var i = 0; i<boxes.length;i++) {
         lat = boxes[i].obj.features[0].geometry.coordinates[1];
         long = boxes[i].obj.features[0].geometry.coordinates[0];
-        console.log(lat);
-        console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+        itemsString = JSON.stringify(boxes[i].items)
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
@@ -134,6 +133,7 @@ function addBoxMarker () {
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
                         "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+
                         "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
+                        "<input id='itemsList' value="+ JSON.stringify(boxes[i].items)+ "></input>"+
                         "<br>"+
                         "<input id='userKey'></input>"+
                         "<button type='button' value='Item zu Box hinzufuegen' onclick='unlockBox()'>Unlock Box</button>"+
@@ -189,7 +189,17 @@ function unlockBox() {
     var userKey = document.getElementById('userKey').value
 
     if(key == userKey) {
-        document.getElementById('info').innerHTML = "Howdy partner! You seem to be allright..take what you need!"
+        document.getElementById('info').innerHTML = `<div>
+        <table id="itemsTable" class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Beschreibung</th>
+                </tr>
+            </thead>
+            <tBody id="itemsTableBody"></tBody>
+        </table>    
+      </div>`
     } 
     else {
         document.getElementById('info').innerHTML = "Oh boy! You seem to be a Stranger round here...better get lost!"

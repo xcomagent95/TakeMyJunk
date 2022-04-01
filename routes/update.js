@@ -46,4 +46,32 @@ router.post('/updateBox', function (req, res, next) {
  
 });
 
+router.post('/removeItemfromBox', function (req, res, next) {
+
+  console.log("Udated a Box!")
+  console.log(req.body)
+  var box = req.body.boxName
+  var newItems = JSON.parse(req.body.newItems)
+  client.connect(function(err) 
+  {
+    const db = client.db(dbName) //database
+    const collection = db.collection(boxesCollection) //locations collection
+
+    collection.find({name: box}).toArray(function(err, docs)
+    {
+      if(docs.length >= 1) { //if a location with the same locationID already exists
+        collection.updateOne({name: box}, {$set:{items: newItems}}, function(err, result) 
+              {
+                res.send(`Hey hey hey! You now own a new items!`)
+                return;
+              })
+            } else {
+              res.send(`Woah slow down partner! Things went wild here!`)
+              return;
+    }
+  }) })
+ 
+ 
+});
+
 module.exports = router; //export as router

@@ -141,14 +141,13 @@ function addBoxMarker () {
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        "<br> <b>Items: </b>"+boxes[i].obj.features[0].properties.items+
+                        "<br> <b>Items: </b>"+itemsNames+
                         "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
                         "<br>"+
                         "<input id='userKey'></input>"+
                         "<button type='button' value='Item zu Box hinzufuegen' onclick='unlockBox()'>Unlock Box</button>"+
                         "<br>"+
                         "<div id='info'></div>"
-                        "<br> <b>Items: </b>"+itemsNames+  
                         '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
                         <br><label for="fname">Name</label><br>\
                         <input id="Name" name="name"><br>\

@@ -9,83 +9,69 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var drawnItems = new L.FeatureGroup().addTo(map);
 var drawControl = new L.Control.Draw({
          draw: {
-             polygon: false,
-             circle: false,
-             circlemarker: false,
-             polyline: false,
-             rectangle: false
-         },
-          edit: {
-              featureGroup: drawnItems,
-              edit: false,
-              remove: false
-          }
-      }).addTo(map);
+            polygon: false,
+            circle: false,
+            circlemarker: false,
+            polyline: false,
+            rectangle: false
+            },
+        edit: {
+            featureGroup: drawnItems,
+            edit: false,
+            remove: false
+        }
+    }).addTo(map);
 
-      map.on('draw:created', function (e) {
+    map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);
         var coordinates = e.layer._latlng;
         var popupContent =  `<div>   
-<div>
-  <form id="addBoxForm" action="/add/addBox" method="post">
-    <br></br>
-    <label for="Name">Name</label><br>
-    <input id="Name" name="name"><br>
-
-    <label for="Kommentar">Kommentar</label><br>
-    <input id="Kommentar" name="commentary"><br>
-
-    <label for="Datum">Datum</label><br>
-    <input id="Datum" name="date" type="date"><br>
-
-    <label for="Strasse">Strasse</label><br>
-    <input id="Strasse" name="street"><br>
-
-    <label for="Hausnummer">Hausnummer</label><br>
-    <input id="Hausnummer" name="house_number"><br>
-
-    <input type="hidden" id="items" name="items" size="40"><br>
-
-    <label for="Koordinaten">Koordinaten</label><br>
-    <input id="Koordinaten" name="coordinates" value="[` + coordinates.lng + `,` +  coordinates.lat + `]" readonly>'
-    <input type="submit" value="Box hinzufuegen">
-  </form> 
-
-  <div>
-    <table id="itemsTable" class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Beschreibung</th>
-            </tr>
-        </thead>
-        <tBody id="itemsTableBody"></tBody>
-    </table>    
-  </div>
-
-
-  <label for="itemName">Name</label><br>
-  <input id="itemName" name="street"><br>
-  <label for="descr">Beschreibung</label><br>
-  <input id="descr" name="descr"><br>
-  <button type="button" value="Item zu Box hinzufuegen" onclick="getItemFromForm()">Item Hinzufuegen</button>
-</div>`;    
-            tempMarker.bindPopup(popupContent,{
+                            <div>
+                            <form id="addBoxForm" action="/add/addBox" method="post">
+                                <br></br>
+                                <label for="Name">Name</label><br>
+                                <input id="Name" name="name"><br>
+                                <label for="Kommentar">Commentary</label><br>
+                                <input id="Kommentar" name="commentary"><br>
+                                <label for="Datum">Date</label><br>
+                                <input id="Datum" name="date" type="date"><br>
+                                <label for="Strasse">Street</label><br>
+                                <input id="Strasse" name="street"><br>
+                                <label for="Hausnummer">House Number</label><br>
+                                <input id="Hausnummer" name="house_number"><br>
+                                <input type="hidden" id="items" name="items" size="40"><br>
+                                <label for="Koordinaten">Coordinates</label><br>
+                                <input id="Koordinaten" name="coordinates" value="[` + coordinates.lng + `,` +  coordinates.lat + `]" readonly>'
+                                <input type="submit" value="Add Box">
+                            </form> 
+                            <div>
+                                <table id="itemsTable" class="table">
+                                    <thead>
+                                        <tr>
+                                            <br>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Desciption</th>
+                                        </tr>
+                                    </thead>
+                                    <tBody id="itemsTableBody"></tBody>
+                                </table>    
+                            </div>
+                            <label for="itemName">Name</label><br>
+                            <input id="itemName" name="street"><br>
+                            <label for="descr">Description</label><br>
+                            <input id="descr" name="descr"><br>
+                            <button type="button" value="Add Item to Box" onclick="getItemFromForm()">Item Hinzufuegen</button>
+                            </div>`;    
+        tempMarker.bindPopup(popupContent,{
             keepInView: true,
             closeButton: true
-            }).openPopup(); 
-    
-    
-        //   if (type === 'marker') {
-            
+        }).openPopup(); 
+        //   if (type === 'marker') {   
         //   }
-    
         // Do whatever else you need to. (save to db, add to map etc)
         map.addLayer(tempMarker);
     });
-    map.on('click', function(e){
 
-    })
 
 var boxes
 function getBoxes() { 
@@ -137,10 +123,10 @@ function addBoxMarker () {
             }
         };
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
-                        "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
+                        "<br> <b>Commentary: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
-                        "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
+                        "<br> <b>House Number: </b>"+boxes[i].obj.features[0].properties.house_number+
                         "<br> <b>Items: </b>"+itemsNames+
                         "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
                         "<br>"+

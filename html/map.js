@@ -113,7 +113,6 @@ function addBoxMarker () {
         iconAnchor:   [16, 37], // point of the icon which will correspond to marker's location
         popupAnchor:  [0, -40] // point from which the popup should open relative to the iconAnchor
     });
-    var itemsString = ""
     for ( var i = 0; i<boxes.length;i++) {
         lat = boxes[i].obj.features[0].geometry.coordinates[1];
         long = boxes[i].obj.features[0].geometry.coordinates[0];
@@ -121,21 +120,21 @@ function addBoxMarker () {
 
         // get array with items
         items = boxes[i].items;
-        var itemsNames = [items[0].name];
+        //var itemsNames = [items[0].name];
         // extract only names from items and save in array
-        for (var j=0; j<items.length; j++) {
-            if (j != 0) {
-            itemsNames = [itemsNames, items[j].name];
-            }
-            itemsString += JSON.stringify(boxes[j].items)
-        };
+        //for (var j=0; j<items.length; j++) {
+            //if (j != 0) {
+            //itemsNames = [itemsNames, items[j].name];
+            //}
+        //};
+        var itemsString = JSON.stringify(boxes[i].items)
 
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        "<br> <b>Items: </b>"+itemsNames+
+                        //"<br> <b>Items: </b>"+itemsNames+
                         "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
                         "<input id='itemsList' type='hidden' value='" + itemsString + "'></input>"+
                         "<input id='boxName' type='hidden' value='" + boxes[i].name + "'></input>"+
@@ -221,8 +220,8 @@ function unlockBox() {
             <tBody id="itemsUpdateTableBody"></tBody>
         </table>   
         <form action="/update/removeItemfromBox" method="post">
-            <input id="boxName" name="boxName" value='` + document.getElementById("boxName").value + `'><br>
-            <input id="newItems" name="newItems" value='` + document.getElementById("itemsList").value + `'><br>
+            <input type='hidden' id="boxName" name="boxName" value='` + document.getElementById("boxName").value + `'><br>
+            <input type='hidden' id="newItems" name="newItems" value='` + document.getElementById("itemsList").value + `'><br>
             <input type="submit" value="Udate">
         </form>
       </div>`
@@ -246,18 +245,20 @@ function unlockBox() {
 }
 
 function takeItems(i) {
+    console.log(i)
     var items = JSON.parse(document.getElementById("itemsList").value)
-    var newItems = items.splice(i, 0)
-    document.getElementById("itemsList").value = JSON.stringify(newItems) 
+    items.splice(i, 1)
+    console.log(items)
+    document.getElementById("itemsList").value = JSON.stringify(items) 
 
 
     var table = document.getElementById('itemsUpdateTableBody'); //get the the table containing the locations
     table.innerHTML = ""
-    for(var i = 0; i < newItems.length; i++) { //iterate over table data
+    for(var i = 0; i < items.length; i++) { //iterate over table data
         //initialize table row as variable
         var row =  `<tr scope="row">
-                        <td>${newItems[i].name}</td>
-                        <td>${newItems[i].description}</td>
+                        <td>${items[i].name}</td>
+                        <td>${items[i].description}</td>
                         <td><button type="button" onclick="takeItems(` + i + `)">take Item</button></td>
                     </tr>`
         table.innerHTML += row; //pass row into given table

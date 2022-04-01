@@ -25,6 +25,9 @@ var drawControl = new L.Control.Draw({
     map.on('draw:created', function (e) {
         var tempMarker = e.layer.addTo(map);
         var coordinates = e.layer._latlng;
+        var popupOptions ={
+            'maxHeight': 300,
+            }
         var popupContent =  `<div>   
                             <div>
                             <form id="addBoxForm" action="/add/addBox" method="post">
@@ -62,7 +65,7 @@ var drawControl = new L.Control.Draw({
                             <input id="descr" name="descr"><br>
                             <button type="button" value="Add Item to Box" onclick="getItemFromForm()">Add Item</button>
                             </div>`;    
-        tempMarker.bindPopup(popupContent,{
+        tempMarker.bindPopup(popupContent, popupOptions,{
             keepInView: true,
             closeButton: true
             }).openPopup(); 
@@ -120,6 +123,10 @@ function addBoxMarker () {
         
         itemsString = JSON.stringify(boxes[i].items)
 
+        var popupOptions ={
+            'maxHeight': 300,
+            }
+
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Commentary: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
@@ -144,8 +151,8 @@ function addBoxMarker () {
                         <label for="newName">Neuer Name</label><br>\
                         <input id="newName" name="newName"><br>\
                         <input type="submit" value="Aktualisieren">\
-                        </form>'
-        marker.bindPopup(popupBoxContent);
+                        </form>';
+        marker.bindPopup(popupBoxContent, popupOptions);
     }
 }
 addBoxMarker();

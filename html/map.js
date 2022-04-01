@@ -83,7 +83,6 @@ var drawControl = new L.Control.Draw({
         // Do whatever else you need to. (save to db, add to map etc)
         map.addLayer(tempMarker);
     });
-
     map.on('click', function(e){
 
     })
@@ -115,6 +114,7 @@ function addBoxMarker () {
     var long;
     var marker;
     var popupBoxContent;
+    var items;
     var boxIcon = L.icon({
         iconUrl: 'g313.png',
         iconSize:     [32, 37], // size of the icon
@@ -127,6 +127,15 @@ function addBoxMarker () {
         console.log(lat);
         console.log(long);
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
+        // get array with items
+        items = boxes[i].items;
+        var itemsNames = [items[0].name];
+        // extract only names from items and save in array
+        for (var j=0; j<items.length; j++) {
+            if (j != 0) {
+            itemsNames = [itemsNames, items[j].name];
+            }
+        };
         popupBoxContent = "<b>Name: </b>" +boxes[i].name +
                         "<br> <b>Comment: </b>" + boxes[i].obj.features[0].properties.commentary+
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
@@ -139,6 +148,19 @@ function addBoxMarker () {
                         "<button type='button' value='Item zu Box hinzufuegen' onclick='unlockBox()'>Unlock Box</button>"+
                         "<br>"+
                         "<div id='info'></div>"
+                        "<br> <b>Items: </b>"+itemsNames+  
+                        '<form id="removeBoxForm" action="/delete/removeBox" method="post">\
+                        <br><label for="fname">Name</label><br>\
+                        <input id="Name" name="name"><br>\
+                        <input type="submit" value="Löschen">\
+                        </form>'+
+                        '<form id="updateBoxForm" action="/update/updateBox" method="post">\
+                        <br><label for="oldName">editiertes Objekt</label><br>\
+                        <input id="oldName" name="oldName"><br>\
+                        <label for="newName">Neuer Name</label><br>\
+                        <input id="newName" name="newName"><br>\
+                        <input type="submit" value="Aktualisieren">\
+                        </form>'
         marker.bindPopup(popupBoxContent);
     }
 }

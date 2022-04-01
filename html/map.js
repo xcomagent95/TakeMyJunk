@@ -74,13 +74,6 @@ var drawControl = new L.Control.Draw({
             keepInView: true,
             closeButton: true
             }).openPopup(); 
-    
-    
-        //   if (type === 'marker') {
-            
-        //   }
-    
-        // Do whatever else you need to. (save to db, add to map etc)
         map.addLayer(tempMarker);
     });
 
@@ -96,7 +89,7 @@ function getBoxes() {
         async: false //function does not return immediately, but has effect on a warning alert in the console
         })
         .done(function(res) { //if the request is done -> successful
-            boxes = res; //retrieve locations from response
+            boxes = res; //retrieve boxes from response
             return;
         })
         .fail(function(xhr, status, errorThrown) { //if the request fails (for some reason)
@@ -108,7 +101,6 @@ function getBoxes() {
     }
 }  
 getBoxes()
-console.log(boxes)
 
 function addBoxMarker () {
     var lat;

@@ -110,7 +110,6 @@ function addBoxMarker () {
         lat = boxes[i].obj.features[0].geometry.coordinates[1];
         long = boxes[i].obj.features[0].geometry.coordinates[0];
         marker = new L.marker([lat, long], {icon: boxIcon}).addTo(map);
-
         // get array with items
         items = boxes[i].items;
         //var itemsNames = [items[0].name];
@@ -121,7 +120,11 @@ function addBoxMarker () {
             //}
         //};
         var itemsString = JSON.stringify(boxes[i].items)
-
+        var itemNames = " "
+        for ( var j = 0; j<boxes[i].items.length;j++) {
+            itemNames += boxes[i].items[j].name +  ' ,'
+        }
+        console.log(itemNames)
         var popupOptions ={
             'maxHeight': 300,
             }
@@ -131,7 +134,7 @@ function addBoxMarker () {
                         "<br> <b>Date: </b>" + boxes[i].obj.features[0].properties.date+
                         "<br> <b>Street: </b>"+boxes[i].obj.features[0].properties.street+
                         "<br> <b>Street Number: </b>"+boxes[i].obj.features[0].properties.house_number+
-                        //"<br> <b>Items: </b>"+itemsNames+
+                        "<br> <b>Items: </b>"+itemNames.slice(0, -1)+
                         "<input id='key' type='hidden' value="+ boxes[i].key+"></input>"+
                         "<input id='itemsList' type='hidden' value='" + itemsString + "'></input>"+
                         "<input id='boxName' type='hidden' value='" + boxes[i].name + "'></input>"+
@@ -191,7 +194,7 @@ function buildItemTable() {
         var row =  `<tr scope="row">
                         <td>${items[i].name}</td>
                         <td>${items[i].description}</td>
-                        <td><button type="button" onclick="deleteItemFromTable(` + i + `)">Item löschen</button></td>
+                        <td><button type="button" onclick="deleteItemFromTable(` + i + `)">delete Item</button></td>
                     </tr>`
         table.innerHTML += row; //pass row into given table
     }
